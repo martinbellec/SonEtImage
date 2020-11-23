@@ -22,7 +22,7 @@ public class App {
     	String path = "C:/ArtsEtSciences/";
     	
         // TODO Auto-generated method stub
-        String filepath = path+"Bite.wav";
+        String filepath = path+"SoundFileName.wav";
         try {
 
             //get raw double array containing .WAV data
@@ -118,7 +118,7 @@ public class App {
                 }
             }
             
-            File outputfile = new File(path+"saved.png");
+            File outputfile = new File(path+"ImageFileName.png");
             ImageIO.write(theImage, "png", outputfile);
             
             System.out.println("end");
