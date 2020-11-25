@@ -54,13 +54,15 @@ public class App {
 			double amplitude = 1.0;
 			double duration = 5.0; //seconds
 			int channels = 2;
+			int nbNotes = 10;
+			int gamme = 0;
 			
 			
 			if((maxfrequency - minfrequency) < nY)
 			{
 				maxfrequency = minfrequency + nY;
 			}
-			int frequencySteep = (int)(maxfrequency - minfrequency) / nY; //pas de fréquence/pixel (partie entiere)
+			int frequencySteep = (int)(maxfrequency - minfrequency) / nY; //pas de frï¿½quence/pixel (partie entiere)
 			
 
 			//for each pixel
