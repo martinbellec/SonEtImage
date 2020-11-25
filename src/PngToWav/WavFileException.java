@@ -2,6 +2,11 @@ package PngToWav;
 
 public class WavFileException extends Exception
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1642607926517893304L;
+
 	public WavFileException()
 	{
 		super();
