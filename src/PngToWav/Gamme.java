@@ -23,7 +23,7 @@ public class Gamme {
 			for (temp = 0; temp < octaveEnd; temp++) {
 				for (temp2 = 0; temp2 < nombreDeNotes; temp2++) {
 					
-					ArrayFreq[nombreDeNotes * temp + temp2 + 1] = ArrayFreq[temp2] * 1.148698354997035;
+					ArrayFreq[nombreDeNotes * temp + temp2 + 1] = ArrayFreq[nombreDeNotes * temp + temp2] * 1.148698354997035;
 					
 				}
 			}
@@ -38,7 +38,7 @@ public class Gamme {
 			for (temp = 0; temp < octaveEnd; temp++) {
 				for (temp2 = 0; temp2 < nombreDeNotes; temp2++) {
 					
-					ArrayFreq[nombreDeNotes * temp + temp2 + 1] = ArrayFreq[temp2] * 1.05946;
+					ArrayFreq[nombreDeNotes * temp + temp2 + 1] = ArrayFreq[nombreDeNotes * temp + temp2] * 1.05946;
 					
 				}
 			}

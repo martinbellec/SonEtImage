@@ -25,7 +25,9 @@ public class App extends Thread{
 	public static BufferedImage image;
 	public static Pixel[][] imagData;
 	public static double maxfrequency, duration;
-	public static int frequencySteep, nX, nY;
+	public static double frequencySteep;
+
+	public static int nX, nY;
 	public static long sampleRate;
 	public static double[][] soundData;
 	public static double[] gammeDeFrequence;
@@ -53,11 +55,15 @@ public class App extends Thread{
             	int blue =  (rgb      ) & 0xFF; //bits[0-7]
             	
             	double frequence = maxfrequency - y*frequencySteep;    ////////////////////////////////////
+            	
             	temp = 0;
-            	while (frequence < gammeDeFrequence[temp]) {
+            	
+            	while (frequence > gammeDeFrequence[temp]) {
             		temp ++;
             	}
-            	frequence = gammeDeFrequence[temp];
+            	frequence = gammeDeFrequence[temp-1];
+            	
+            	
             	
             	//System.out.println(red + " " + green + " " + blue + " " +rgb);
             	imagData[x][y] = new Pixel(frequence, red, blue);
@@ -96,13 +102,13 @@ public class App extends Thread{
 			nY = image.getHeight(); //the number of pixel on the y ax is the Height
 			imagData = new Pixel[nX][nY];
 			
-			int choixGamme = 1;         /////////////////////////////////////////////////////////////////////
+			int choixGamme = 0;         /////////////////////////////////////////////////////////////////////
 			int octaveBegin = 0;
 			int octaveEnd = 3;
 			
 			Gamme gamme = new Gamme();
 			gammeDeFrequence = gamme.creerGamme(choixGamme, octaveBegin, octaveEnd);
-			System.out.println(gammeDeFrequence[gammeDeFrequence.length - 4]);
+			//System.out.println(gammeDeFrequence[gammeDeFrequence.length - 4]);
 			
 			
 			/* For the sound */
@@ -117,7 +123,7 @@ public class App extends Thread{
 			//int colorTolerance = 5; // 0-10 scale
 			//int xTolerance = 5; // à-10 scale
 
-			frequencySteep = (int)(maxfrequency - minfrequency) / nY; //pas de fr�quence/pixel (partie entiere)
+			frequencySteep = (maxfrequency - minfrequency) / nY; //pas de fr�quence/pixel (partie entiere)
 			
 			/*System.out.println("---------------------------------------------------");
 			System.out.println("Maximum frequency: " + maxfrequency);
