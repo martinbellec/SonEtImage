@@ -10,19 +10,11 @@ import javax.imageio.ImageIO;
 
 public class App {
 
-    public static Color getColor(double power) {
-        double H = power * 0.4; // Hue (note 0.4 = Green, see huge chart below)
-        double S = 1.0; // Saturation
-        double B = 1.0; // Brightness
-
-        return Color.getHSBColor((float)H, (float)S, (float)B);
-    }
-
     public static void main(String[] args) {
-    	String path = "C:/ArtsEtSciences/";
-    	
-        // TODO Auto-generated method stub
-        String filepath = path+"SoundFileName.wav";
+    	//String path = "C:/ArtsEtSciences/";
+    	String path = args[0];
+        
+        String filepath = path+".wav";
         try {
 
             //get raw double array containing .WAV data
@@ -102,8 +94,6 @@ public class App {
                     plotData[i][j] = (plotData[i][j]-minAmp)/diff;
                 }
             }
-            
-            System.out.println("Ready to plot ...");
 
             //plot image
             BufferedImage theImage = new BufferedImage(nX, nY, BufferedImage.TYPE_INT_RGB);
@@ -111,16 +101,15 @@ public class App {
             for(int x = 0; x<nX; x++){
                 for(int y = 0; y<nY; y++){
                     ratio = plotData[x][y];
-
-                    //theImage.setRGB(x, y, new Color(red, green, 0).getRGB());
-                    Color newColor = getColor(1.0-ratio);
-                    theImage.setRGB(x, y, newColor.getRGB());
+                    int newColor = Color.HSBtoRGB( (float) ( (1-ratio) * 0.4), (float)1.0,(float) 1.0);
+                    theImage.setRGB(x, y, newColor);
                 }
             }
             
-            File outputfile = new File(path+"ImageFileName.png");
+            File outputfile = new File(path+".png");
             ImageIO.write(theImage, "png", outputfile);
             
+            System.out.println("File output path:  " + path+".png");
             System.out.println("end");
 
         } catch (IOException e) {
