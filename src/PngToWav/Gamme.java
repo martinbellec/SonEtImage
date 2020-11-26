@@ -1,8 +1,11 @@
 package PngToWav;
 
-public class Gammes {
+public class Gamme {
+	
+	public Gamme() {
+	}
 
-	public void creerGamme(int choixGamme, int octaveBegin, int octaveEnd) {
+	public double[] creerGamme(int choixGamme, int octaveBegin, int octaveEnd) {
 
 		double c0 = 32.7032;
 		double freqBegin = c0 * Math.pow(2, octaveBegin);
@@ -71,6 +74,8 @@ public class Gammes {
 				
 			}
 		}
+		
+		return (ArrayFreq);
 		
 	}
 }

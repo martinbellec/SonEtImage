@@ -28,6 +28,7 @@ public class App extends Thread{
 	public static int frequencySteep, nX, nY;
 	public static long sampleRate;
 	public static double[][] soundData;
+	public static double[] gammeDeFrequence;
 	
 	public App(int x) {
 		this.x = x;
@@ -38,6 +39,7 @@ public class App extends Thread{
 		// Calculate the number of frames required for specified duration
 		long numFrames = (long)(duration * sampleRate);
 		int  sampleByPixel = (int) numFrames/nX;
+		int temp;
 				
 		for(int y = 0; y<nY; y++){
 			
@@ -45,13 +47,20 @@ public class App extends Thread{
 			//always returns TYPE_INT_ARGB
 				
 
-        	if (rgb != -1) { //if the pixel is not black
+        	if (rgb != -1) { //if the pixel is not white
         		int red =   (rgb >> 16) & 0xFF; //bits[16-23]
             	//int green = (rgb >>  8) & 0xFF; //bits[8-15]
             	int blue =  (rgb      ) & 0xFF; //bits[0-7]
             	
+            	double frequence = maxfrequency - y*frequencySteep;    ////////////////////////////////////
+            	temp = 0;
+            	while (frequence < gammeDeFrequence[temp]) {
+            		temp ++;
+            	}
+            	frequence = gammeDeFrequence[temp];
+            	
             	//System.out.println(red + " " + green + " " + blue + " " +rgb);
-            	imagData[x][y] = new Pixel((int)maxfrequency - y*frequencySteep, red, blue);
+            	imagData[x][y] = new Pixel(frequence, red, blue);
             	//imagData[x][y].display();
             	
             	for(int sample = 0; sample < sampleByPixel ; sample++){
@@ -95,9 +104,16 @@ public class App extends Thread{
 			duration = 5.0; //seconds
 			int channels = 2;
 			//int nbNotes = 10;
-			//int gamme = 0; // 0 Free ; 1 Mineure ; 2 Majeur ; 3 Chromatique
+			//int choixGamme = 0; // 0 5TET ; 1 12TET ; 2 Majeur ; 3 Mineur
 			//int colorTolerance = 5; // 0-10 scale
 			//int xTolerance = 5; // à-10 scale
+			
+			int choixGamme = 1;         /////////////////////////////////////////////////////////////////////
+			int octaveBegin = 0;
+			int octaveEnd = 3;
+			
+			Gamme gamme = new Gamme();
+			gammeDeFrequence = gamme.creerGamme(choixGamme, octaveBegin, octaveEnd);
 			
 			if((maxfrequency - minfrequency) < nY)
 			{

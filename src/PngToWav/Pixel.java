@@ -2,19 +2,19 @@ package PngToWav;
 
 public class Pixel {
 	
-	private int frequency;
+	private double frequency;
 	private double volume; // 0 - 255
 	private int pan; // 0 - 255
 	
 
-	public Pixel(int frequency, int volume, int pan) {
+	public Pixel(double frequency, int volume, int pan) {
 		this.frequency = frequency;
 		this.volume = volume /255.0;
 		this.pan = pan;
 	}
 
 
-	public int getFrequency() {
+	public double getFrequency() {
 		return frequency;
 	}
 
