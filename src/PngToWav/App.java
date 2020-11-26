@@ -96,10 +96,19 @@ public class App extends Thread{
 			nY = image.getHeight(); //the number of pixel on the y ax is the Height
 			imagData = new Pixel[nX][nY];
 			
+			int choixGamme = 1;         /////////////////////////////////////////////////////////////////////
+			int octaveBegin = 0;
+			int octaveEnd = 3;
+			
+			Gamme gamme = new Gamme();
+			gammeDeFrequence = gamme.creerGamme(choixGamme, octaveBegin, octaveEnd);
+			System.out.println(gammeDeFrequence[gammeDeFrequence.length - 4]);
+			
+			
 			/* For the sound */
 			sampleRate = 44100; // Samples per second
-			maxfrequency = 1000;
-			double minfrequency = 440;
+			maxfrequency = gammeDeFrequence[gammeDeFrequence.length - 1];
+			double minfrequency = gammeDeFrequence[0];
 			//double amplitude = 1.0;
 			duration = 5.0; //seconds
 			int channels = 2;
@@ -107,18 +116,7 @@ public class App extends Thread{
 			//int choixGamme = 0; // 0 5TET ; 1 12TET ; 2 Majeur ; 3 Mineur
 			//int colorTolerance = 5; // 0-10 scale
 			//int xTolerance = 5; // à-10 scale
-			
-			int choixGamme = 1;         /////////////////////////////////////////////////////////////////////
-			int octaveBegin = 0;
-			int octaveEnd = 3;
-			
-			Gamme gamme = new Gamme();
-			gammeDeFrequence = gamme.creerGamme(choixGamme, octaveBegin, octaveEnd);
-			
-			if((maxfrequency - minfrequency) < nY)
-			{
-				maxfrequency = minfrequency + nY;
-			}
+
 			frequencySteep = (int)(maxfrequency - minfrequency) / nY; //pas de fr�quence/pixel (partie entiere)
 			
 			/*System.out.println("---------------------------------------------------");

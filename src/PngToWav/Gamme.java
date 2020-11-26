@@ -12,17 +12,18 @@ public class Gamme {
 		int temp, temp2;
 		int nombreDeNotes;
 
-		double[] ArrayFreq = new double[] { freqBegin };
+		double[] ArrayFreq = {};
 
 		if (choixGamme == 0) {
 			// Five Tone Equal Temperament
 			
 			nombreDeNotes = 5; 
-			
-			for (temp = 0; temp < octaveEnd - octaveBegin; temp++) {
+			ArrayFreq = new double[octaveEnd*nombreDeNotes +1];
+	        ArrayFreq[0] = freqBegin;
+			for (temp = 0; temp < octaveEnd; temp++) {
 				for (temp2 = 0; temp2 < nombreDeNotes; temp2++) {
 					
-					ArrayFreq[temp2 + 1] = ArrayFreq[temp2] * 1.148698354997035;
+					ArrayFreq[nombreDeNotes * temp + temp2 + 1] = ArrayFreq[temp2] * 1.148698354997035;
 					
 				}
 			}
@@ -32,10 +33,12 @@ public class Gamme {
 			// Twelve Tone Equal Temperament (gamme chromatique)
 			
 			nombreDeNotes = 12;
-			for (temp = 0; temp < octaveEnd - octaveBegin; temp++) {
+			ArrayFreq = new double[octaveEnd*nombreDeNotes +1];
+	        ArrayFreq[0] = freqBegin;
+			for (temp = 0; temp < octaveEnd; temp++) {
 				for (temp2 = 0; temp2 < nombreDeNotes; temp2++) {
 					
-					ArrayFreq[temp2 + 1] = ArrayFreq[temp2] * 1.05946;
+					ArrayFreq[nombreDeNotes * temp + temp2 + 1] = ArrayFreq[temp2] * 1.05946;
 					
 				}
 			}
@@ -45,15 +48,17 @@ public class Gamme {
 			// Twelve Tone Equal Temperament (gamme chromatique)
 			
 			nombreDeNotes = 7;
-			for (temp = 0; temp < octaveEnd - octaveBegin; temp++) {
+			ArrayFreq = new double[octaveEnd*nombreDeNotes +1];
+	        ArrayFreq[0] = freqBegin;
+			for (temp = 0; temp < octaveEnd; temp++) {
 				
-				ArrayFreq[temp+1] = ArrayFreq[temp] * 1.05946 * 1.05946;
-				ArrayFreq[temp+2] = ArrayFreq[temp+1] * 1.05946 * 1.05946;
-				ArrayFreq[temp+3] = ArrayFreq[temp+2] * 1.05946;
-				ArrayFreq[temp+4] = ArrayFreq[temp+3] * 1.05946 * 1.05946;
-				ArrayFreq[temp+5] = ArrayFreq[temp+4] * 1.05946 * 1.05946;
-				ArrayFreq[temp+6] = ArrayFreq[temp+5] * 1.05946 * 1.05946;
-				ArrayFreq[temp+7] = ArrayFreq[temp+6] * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+1] = ArrayFreq[nombreDeNotes * temp] * 1.05946 * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+2] = ArrayFreq[nombreDeNotes * temp+1] * 1.05946 * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+3] = ArrayFreq[nombreDeNotes * temp+2] * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+4] = ArrayFreq[nombreDeNotes * temp+3] * 1.05946 * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+5] = ArrayFreq[nombreDeNotes * temp+4] * 1.05946 * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+6] = ArrayFreq[nombreDeNotes * temp+5] * 1.05946 * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+7] = ArrayFreq[nombreDeNotes * temp+6] * 1.05946;
 				
 			}
 		}
@@ -62,17 +67,23 @@ public class Gamme {
 			// Twelve Tone Equal Temperament (gamme chromatique)
 			
 			nombreDeNotes = 7;
-			for (temp = 0; temp < octaveEnd - octaveBegin; temp++) {
+			ArrayFreq = new double[octaveEnd*nombreDeNotes +1];
+	        ArrayFreq[0] = freqBegin;
+			for (temp = 0; temp < octaveEnd; temp++) {
 				
-				ArrayFreq[temp+1] = ArrayFreq[temp] * 1.05946 * 1.05946;
-				ArrayFreq[temp+3] = ArrayFreq[temp+2] * 1.05946;
-				ArrayFreq[temp+2] = ArrayFreq[temp+1] * 1.05946 * 1.05946;
-				ArrayFreq[temp+4] = ArrayFreq[temp+3] * 1.05946 * 1.05946;
-				ArrayFreq[temp+7] = ArrayFreq[temp+6] * 1.05946;
-				ArrayFreq[temp+5] = ArrayFreq[temp+4] * 1.05946 * 1.05946;
-				ArrayFreq[temp+6] = ArrayFreq[temp+5] * 1.05946 * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+1] = ArrayFreq[nombreDeNotes * temp] * 1.05946 * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+3] = ArrayFreq[nombreDeNotes * temp+1] * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+2] = ArrayFreq[nombreDeNotes * temp+2] * 1.05946 * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+4] = ArrayFreq[nombreDeNotes * temp+3] * 1.05946 * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+7] = ArrayFreq[nombreDeNotes * temp+4] * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+5] = ArrayFreq[nombreDeNotes * temp+5] * 1.05946 * 1.05946;
+				ArrayFreq[nombreDeNotes * temp+6] = ArrayFreq[nombreDeNotes * temp+6] * 1.05946 * 1.05946;
 				
 			}
+		}
+		
+		for(int i = 0; i< ArrayFreq.length; i++) {
+			System.out.println(ArrayFreq[i]);
 		}
 		
 		return (ArrayFreq);
