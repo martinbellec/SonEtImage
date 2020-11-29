@@ -82,7 +82,7 @@ public class App extends Thread{
 	}
 	
 	public static void main(String[] args) {
-		String path = "/home/martin/Documents/ArtsEtSciences/Sans titre";
+		String path = "/home/martin/Documents/ArtsEtSciences/GeoTortue002";
 
 		try {
 			//open the input file to the stream
