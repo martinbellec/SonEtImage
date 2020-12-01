@@ -82,10 +82,10 @@ public class Gamme {
 			}
 		}
 		
-		for(int i = 0; i< ArrayFreq.length; i++) {
+	/*	for(int i = 0; i< ArrayFreq.length; i++) {
 			System.out.println(ArrayFreq[i]);
 		}
-		
+	*/	
 		return (ArrayFreq);
 		
 	}
