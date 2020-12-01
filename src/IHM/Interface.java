@@ -265,7 +265,7 @@ public class Interface {
 		c.insets = insets;
 		contentPane.add(PanningB, c);
 		
-		JTextField tfDuration = new JTextField("5");
+		JTextField tfDuration = new JTextField("10");
 		c.gridx = 3;
 		c.gridy = 4;
 		c.gridheight = 1; // do not remove
