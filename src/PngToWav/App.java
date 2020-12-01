@@ -82,8 +82,8 @@ public class App extends Thread{
 	}
 	
 	public static void main(String[] args) {
-		String path = "/home/martin/Documents/ArtsEtSciences/GeoTortue002";
-
+		//String path = "/home/martin/Documents/ArtsEtSciences/GeoTortue002";
+		String path = "C:/ArtsEtSciences/Sans_titre";
 		try {
 			//open the input file to the stream
 			InputStream streamInput =  new FileInputStream(path+".png");
@@ -102,7 +102,7 @@ public class App extends Thread{
 			nY = image.getHeight(); //the number of pixel on the y ax is the Height
 			imagData = new Pixel[nX][nY];
 			
-			int choixGamme = 0;         /////////////////////////////////////////////////////////////////////
+			int choixGamme = 2;         /////////////////////////////////////////////////////////////////////
 			int octaveBegin = 0;
 			int octaveEnd = 3;
 			
