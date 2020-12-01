@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.naming.PartialResultException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -26,7 +27,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import PngToWav.*;
 
-public class Interface implements ActionListener{
+public class Interface {
 	
 	 private static JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
 	
@@ -39,8 +40,7 @@ public class Interface implements ActionListener{
 	}
 	
 	JTextField label1,label2;  
-    JButton b1,b2,bopen,bOut; 
-    String path = "/home/martin/Documents/ArtsEtSciences/";
+    JButton bopen,bOut,bStart; 
 	
 	public static void main(String[] args) {
 		Interface inter = new Interface();
@@ -64,32 +64,26 @@ public class Interface implements ActionListener{
         
         Container contentPane = f.getContentPane();
         contentPane.setBackground( Color. black );
-       // contentPane.setLayout(new BorderLayout(6, 6));
         Insets insets = new Insets(5, 10,20, 20);
         
         
         label1=new JTextField();
         label1.setBackground(Color.WHITE);
-        //label1.setBounds(50,50,150,20);
-        //label1.setText("coucou");
         c.gridx = 1;
         c.gridy = 2;
         c.insets = insets;
         c.anchor = GridBagConstraints.NORTHWEST;
         c.fill = GridBagConstraints.HORIZONTAL;
-        //c.weightx = 1;
-       // c.ipady = 20;
         contentPane.add(label1,c);
+        
         
         insets.set(5, 10, 5, 20);
         
         bopen=new JButton(new ImageIcon(System.getProperty("user.dir") + "\\images\\BoutonOpen.png"));
-        //bopen.setBounds(50,100,200,50);
         c.gridx = 1;
         c.gridy = 0;
         c.anchor = GridBagConstraints.NORTHWEST;
         c.fill = GridBagConstraints.NONE;
-        //c.ipady = 0;
         c.insets = insets;
         bopen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -99,6 +93,7 @@ public class Interface implements ActionListener{
 				{
 					//file= openFile();
 					label1.setText(file.getPath());
+					label2.setText(file.getPath().substring(0, file.getPath().indexOf('.'))+".wav");
 				}
 			}
 		});
@@ -108,7 +103,6 @@ public class Interface implements ActionListener{
         
         
         bOut=new JButton(new ImageIcon(System.getProperty("user.dir") + "\\images\\BoutonOut.png"));
-        //bopen.setBounds(50,100,200,50);
         c.gridx = 1;
         c.gridy = 5;
         c.anchor = GridBagConstraints.SOUTHWEST;
@@ -120,7 +114,8 @@ public class Interface implements ActionListener{
 				File file =  openDirectory();
 				if (file !=null )
 				{
-					label2.setText(file.getPath());
+
+					label2.setText(file.getPath()+label2.getText().substring(label2.getText().lastIndexOf("\\"),label2.getText().length() ));
 				}
 			}
 		});
@@ -128,6 +123,7 @@ public class Interface implements ActionListener{
         
         
         label2=new JTextField();
+        label2.setText((System.getProperty("user.dir")+"\\out.wav"));
         c.gridx = 1;
         c.gridy = 6;
         c.anchor = GridBagConstraints.SOUTHWEST;
@@ -135,6 +131,24 @@ public class Interface implements ActionListener{
         c.insets = insets;
        
         contentPane.add(label2,c);
+        
+        
+        
+        bStart=new JButton("Start");//new ImageIcon(System.getProperty("user.dir") + "\\images\\BoutonOut.png"));
+        c.gridx = 2;
+        c.gridy = 8;
+        c.anchor = GridBagConstraints.CENTER;
+        c.fill = GridBagConstraints.NONE;
+        c.insets = insets;
+        bStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        String fileIn = label1.getText();  
+		        String fileOut = label2.getText(); 
+		        System.out.println("file in " + fileIn+" Fileout : "+ fileOut);
+		        App test = new App(fileIn, fileOut);
+			}
+		});
+        contentPane.add(bStart,c);
         
         
         
@@ -197,11 +211,5 @@ public class Interface implements ActionListener{
         System.exit(0);
     }
     
-    public void actionPerformed(ActionEvent e) {  
-        String fileIn = label1.getText();  
-        String fileOut = label2.getText();  
-        App test = new App(path + fileIn, path + fileOut);
-        
-    }
 
 }

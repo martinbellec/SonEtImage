@@ -36,6 +36,12 @@ public class App extends Thread{
 		this.x = x;
 	}
 	
+	public App(String filepathIn, String fileOut) {
+		spectro(filepathIn, fileOut);
+	}
+	
+	
+	
 	public void run() {
 		
 		// Calculate the number of frames required for specified duration
@@ -81,15 +87,16 @@ public class App extends Thread{
 		}
 	}
 	
-	public static void main(String[] args) {
+	public void spectro(String filepathIn, String fileOut) {
 		//String path = "/home/martin/Documents/ArtsEtSciences/GeoTortue002";
-		String path = "C:/ArtsEtSciences/Sans_titre";
+		//String path = "C:/ArtsEtSciences/Sans_titre";
 		try {
 			//open the input file to the stream
-			InputStream streamInput =  new FileInputStream(path+".png");
+			//InputStream streamInput =  new FileInputStream(path+".png");
+			InputStream streamInput =  new FileInputStream(filepathIn);
 			
 			//create output file
-			File outputfile = new File(path+".wav");
+			File outputfile = new File(fileOut);
 
 			//import the stream to an Array 
 			image = ImageIO.read(streamInput);
