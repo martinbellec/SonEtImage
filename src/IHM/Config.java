@@ -2,12 +2,19 @@ package IHM;
 
 public class Config {
 	
+	//for PngToWav
 	private int gamme;
 	private int octaveMin;
 	private int octaveMax;
 	private int keyVolumeColor;
 	private int keyPannignColor;
 	private double duration;
+	
+	//for WavToPng
+	private float keyHue;
+	private float keyBrightness;
+	private float keySaturation;
+	
 
 	/**
 	 * 
@@ -29,7 +36,12 @@ public class Config {
 		this.duration =  Double.parseDouble(duration);
 	}
 	
-	
+	public Config(int keyHue, int keyBrightness, int keySaturation) {
+		this.keyHue = (float) (keyHue/100.0);
+		this.keyBrightness = (float) (keyBrightness/100.0);
+		this.keySaturation = (float) (keySaturation/100.0);
+	}
+
 	private int StringRGBtoint(String rgb) {
 		int num = 0;
 		switch (rgb) {
@@ -75,10 +87,25 @@ public class Config {
 		return duration;
 	}
 	
-	public void display() {
+	public float  getkeyHue() {
+		return keyHue;
+	}
+
+	public float getKeyBrightness() {
+		return keyBrightness;
+	}
+
+	public float getKeySaturation() {
+		return keySaturation;
+	}
+
+	public void displayPTW() {
 		System.out.println("gamme "+gamme+" "+octaveMin + " "+octaveMax+" "+keyVolumeColor+" "+keyPannignColor+" " +duration);
 	}
 	
+	public void displayWTP() {
+		System.out.println(keyHue +" "+ keyBrightness +" "+ keySaturation);
+	}
 	
 	
 }

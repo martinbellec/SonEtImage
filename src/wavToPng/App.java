@@ -6,29 +6,30 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-import javax.imageio.ImageIO;
+import IHM.Config;
 
 public class App {
-
-    public static void main(String[] args) {
-    	//String path = "C:/ArtsEtSciences/";
-    	String path = args[0];
+	
+	
+	public App(String filepathIn, String fileOut, Config conf) {
+		spectro(filepathIn, fileOut,conf);
+	}
+		
+	public void spectro(String filepathIn, String fileOut,Config config) {
         
-        String filepath = path+".wav";
         try {
-
             //get raw double array containing .WAV data
-            ReadWAV2Array audioTest = new ReadWAV2Array(filepath, true);
+            ReadWAV2Array audioTest = new ReadWAV2Array(filepathIn, false);
             double[] rawData = audioTest.getByteArray();
             int length = rawData.length;
             
             //initialize parameters for FFT
             int WS = 2048; //WS = window size
-            int OF = 8;    //OF = overlap factor
+            int OF = 16;    //OF = overlap factor
             int windowStep = WS/OF;
 
             //calculate FFT parameters
-            double SR = audioTest.getSR();
+/*            double SR = audioTest.getSR();
             double time_resolution = WS/SR;
             double frequency_resolution = SR/WS;
             double highest_detectable_frequency = SR/2.0;
@@ -38,7 +39,7 @@ public class App {
             System.out.println("frequency_resolution:         " + frequency_resolution + " Hz");
             System.out.println("highest_detectable_frequency: " + highest_detectable_frequency + " Hz");
             System.out.println("lowest_detectable_frequency:  " + lowest_detectable_frequency + " Hz");
-
+*/
             //initialize plotData array
             int nX = (length-WS)/windowStep;
             //int nY = WS;
@@ -63,9 +64,6 @@ public class App {
                         plotData[i][j] = amp_square;
                     }
                     else{
-                    	/*Good*/
-                    	//plotData[i][nY-j-1] = 10 * Math.log10(amp_square);
-                        
                     	/*Better*/
                     	// select threshold based on the expected spectrum amplitudes
                     	// e.g. 80dB below your signal's spectrum peak amplitude
@@ -82,18 +80,19 @@ public class App {
                 }
             }
 
-            System.out.println("---------------------------------------------------");
+   /*         System.out.println("---------------------------------------------------");
             System.out.println("Maximum amplitude: " + maxAmp);
             System.out.println("Minimum amplitude: " + minAmp);
             System.out.println("---------------------------------------------------");
 
-            //Normalization
+     */     //Normalization
             double diff = maxAmp - minAmp;
             for (int i = 0; i < nX; i++){
                 for (int j = 0; j < nY; j++){
                     plotData[i][j] = (plotData[i][j]-minAmp)/diff;
                 }
             }
+            
 
             //plot image
             BufferedImage theImage = new BufferedImage(nX, nY, BufferedImage.TYPE_INT_RGB);
@@ -101,17 +100,19 @@ public class App {
             for(int x = 0; x<nX; x++){
                 for(int y = 0; y<nY; y++){
                     ratio = plotData[x][y];
-                    int newColor = Color.HSBtoRGB( (float) ( (1-ratio) * 0.4), (float)1.0,(float) 1.0);
+                    int newColor = Color.HSBtoRGB((float)((1-ratio) * config.getkeyHue()), config.getKeySaturation(),config.getKeyBrightness());
+                  //  int newColor = Color.HSBtoRGB((float)((1-ratio) * 0.4), (float)1.0,(float)1.0);
                     theImage.setRGB(x, y, newColor);
                 }
             }
             
-            File outputfile = new File(path+".png");
-            ImageIO.write(theImage, "png", outputfile);
+            @SuppressWarnings("unused")
+			File outputfile = new File(fileOut);
+/*            ImageIO.write(theImage, "png", outputfile);
             
-            System.out.println("File output path:  " + path+".png");
+            System.out.println("File output path:  " + fileOut);
             System.out.println("end");
-
+*/
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

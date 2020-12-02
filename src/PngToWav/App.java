@@ -73,9 +73,6 @@ public class App extends Thread{
 
 
 	public void run() {
-
-
-
 		// Calculate the number of frames required for specified duration
 		long numFrames = (long)(duration * sampleRate);
 		int  sampleByPixel = (int) numFrames/nX;
@@ -135,7 +132,7 @@ public class App extends Thread{
 			//close the input stream
 			streamInput.close();
 
-			config.display();
+			config.displayPTW();
 
 
 			//initialize imagData array
