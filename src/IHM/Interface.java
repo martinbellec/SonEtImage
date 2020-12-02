@@ -49,15 +49,7 @@ public class Interface {
 
 	public void makeFrame() {
 		f = new JFrame("Convertisseur Son -> Image");
-		try {
-			f.setIconImage(ImageIO.read(new FileInputStream(System.getProperty("user.dir") + "\\images\\INP.jpg")));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		f.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("INP.jpg")).getImage());
 
 		f.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -77,7 +69,7 @@ public class Interface {
 
 		// insets.set(5, 10, 5, 20);
 
-		bopen = new JButton(new ImageIcon(System.getProperty("user.dir") + "\\images\\BoutonOpen.png"));
+		bopen = new JButton(new ImageIcon(getClass().getClassLoader().getResource("BoutonOpen.PNG")));
 		c.gridx = 1;
 		c.gridy = 0;
 		c.anchor = GridBagConstraints.CENTER;
@@ -97,7 +89,7 @@ public class Interface {
 		});
 		contentPane.add(bopen, c);
 
-		bOut = new JButton(new ImageIcon(System.getProperty("user.dir") + "\\images\\BoutonOut.png"));
+		bOut = new JButton(new ImageIcon(getClass().getClassLoader().getResource("BoutonOut.PNG")));
 		// bOut.setBackground(Color.BLACK);
 		c.gridx = 1;
 		c.gridy = 4;
