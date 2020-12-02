@@ -25,6 +25,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import PngToWav.App;
@@ -179,7 +180,7 @@ public class Interface {
 		gamme.add("Majeur"); // 2
 		gamme.add("Mineur"); // 3
 		gamme.select(2);
-		c.gridx = 2;
+		c.gridx = 3;
 		c.gridy = 0;
 		c.anchor = GridBagConstraints.CENTER;
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -297,15 +298,20 @@ public class Interface {
 		labelSeconde.setForeground(Color.WHITE);
 		c.gridx = 4;
 		c.gridy = 4;
+		c.gridheight = 1; //do not remove
+		c.gridwidth = 1; //do not remove
 		c.anchor = GridBagConstraints.CENTER;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = insets;
 		contentPane.add(labelSeconde, c);
 
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		//f.pack();
 		f.setLocation(d.width / 3, d.height / 5);
 		f.setSize(800, 500);
+		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		f.setVisible(true);
+		
 	}
 
 	/** Open function: open a file chooser to select a new automaton */
