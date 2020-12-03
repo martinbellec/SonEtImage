@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
+import javax.imageio.ImageIO;
+
 import IHM.Config;
 
 public class App {
@@ -106,11 +108,10 @@ public class App {
                 }
             }
             
-            @SuppressWarnings("unused")
 			File outputfile = new File(fileOut);
-/*            ImageIO.write(theImage, "png", outputfile);
+            ImageIO.write(theImage, "png", outputfile);
             
-            System.out.println("File output path:  " + fileOut);
+/*            System.out.println("File output path:  " + fileOut);
             System.out.println("end");
 */
         } catch (IOException e) {
