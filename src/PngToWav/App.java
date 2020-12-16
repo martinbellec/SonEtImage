@@ -77,6 +77,7 @@ public class App extends Thread{
 		long numFrames = (long)(duration * sampleRate);
 		int  sampleByPixel = (int) numFrames/nX;
 		int temp;
+		int PixelProcess = 0;
 
 		for(int y = 0; y<nY; y++){
 
@@ -85,7 +86,7 @@ public class App extends Thread{
 
 
 			if (rgb != -1) { //if the pixel is not white
-
+				PixelProcess++;
 
 				double frequence = maxfrequency - y*frequencySteep;    ////////////////////////////////////
 
@@ -109,9 +110,15 @@ public class App extends Thread{
 					//System.out.println(x + " "+ y+ " " + sample+ " data "+ soundData[0][x*nY + y]);
 				}
 				//System.out.println(x + " "+ y+ " "+ " data "+ soundData[0][x*nY + y]);
-			}else
-				imagData[x][y] = null;
+			}
 		}
+		for(int sample = 0; sample < sampleByPixel ; sample++){
+			// Fill the buffer, 
+			soundData[0][x*sampleByPixel  + sample] /= PixelProcess;
+			soundData[1][x*sampleByPixel  + sample] /= PixelProcess;
+			//System.out.println(x + " "+ y+ " " + sample+ " data "+ soundData[0][x*nY + y]);
+		}
+		
 	}
 
 
@@ -158,9 +165,9 @@ public class App extends Thread{
 			//int nbNotes = 10;
 			//int choixGamme = 0; // 0 5TET ; 1 12TET ; 2 Majeur ; 3 Mineur
 			//int colorTolerance = 5; // 0-10 scale
-			//int xTolerance = 5; // à-10 scale
+			//int xTolerance = 5; // Ã -10 scale
 
-			frequencySteep = (maxfrequency - minfrequency) / nY; //pas de fr�quence/pixel (partie entiere)
+			frequencySteep = (maxfrequency - minfrequency) / nY; //pas de frï¿½quence/pixel (partie entiere)
 
 			/*System.out.println("---------------------------------------------------");
 			System.out.println("Maximum frequency: " + maxfrequency);
@@ -201,7 +208,7 @@ public class App extends Thread{
 			//display info
 			wavFile.display();
 
-			System.out.println("Traitement termin� !");
+			System.out.println("Traitement terminé !");
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
