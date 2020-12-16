@@ -183,6 +183,7 @@ public class InterfacePngToWav {
 		for (Integer i = 0; i < 10; i++) {
 			minOctave.add(i.toString());
 		}
+		minOctave.select(1);
 		c.gridx = 3;
 		c.gridy = 1;
 		c.anchor = GridBagConstraints.CENTER;
@@ -194,7 +195,7 @@ public class InterfacePngToWav {
 		for (Integer i = 1; i < 10; i++) {
 			maxOctave.add(i.toString());
 		}
-		maxOctave.select(2);
+		maxOctave.select(4);
 		c.gridx = 4;
 		c.gridy = 1;
 		c.anchor = GridBagConstraints.CENTER;
