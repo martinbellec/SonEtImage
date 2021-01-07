@@ -1,6 +1,5 @@
 package IHM;
 
-import java.awt.Choice;
 import java.io.FileWriter;
 import java.io.IOException;
 
