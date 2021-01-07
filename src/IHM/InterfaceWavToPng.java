@@ -10,11 +10,16 @@ import java.awt.Insets;
 import java.awt.Label;
 import java.awt.Scrollbar;
 import java.awt.Toolkit;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.io.File;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -249,6 +254,30 @@ public class InterfaceWavToPng {
 		});
 		contentPane.add(bStart, c);
 		
+		//drag and drop
+		f.setDropTarget(new DropTarget() {
+			 public synchronized void drop(DropTargetDropEvent evt) {
+			        try {
+			            evt.acceptDrop(DnDConstants.ACTION_COPY);
+			            List<File> droppedFiles = (List<File>)
+			                evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+			            for (File file : droppedFiles) {
+			            	if( file.getPath().substring(file.getPath().indexOf('.'),file.getPath().length()).contains("wav") )
+			            	{
+			            		label1.setText(file.toString());
+				            	label2.setText(file.getPath().substring(0, file.getPath().indexOf('.')) + ".png");
+			            	}else
+			            	{
+			            		JOptionPane.showMessageDialog(f, "The file was not in a recognized read file format. (WAV)",
+			        					"File read Error", JOptionPane.ERROR_MESSAGE); // message d'erreur : le fichier n'a pas pu être lu
+			            	}
+			            	
+			            }
+			        } catch (Exception ex) {
+			            ex.printStackTrace();
+			        }
+			    }
+		});
 
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		//f.pack();
@@ -279,7 +308,7 @@ public class InterfaceWavToPng {
 		if (selectedFile.canRead()) {
 			return selectedFile;
 		} else {
-			JOptionPane.showMessageDialog(f, "The file was not in a recognized read file format. (PNG)",
+			JOptionPane.showMessageDialog(f, "The file was not in a recognized read file format. (WAV)",
 					"File read Error", JOptionPane.ERROR_MESSAGE); // message d'erreur : le fichier n'a pas pu être lu
 			return null;
 		}

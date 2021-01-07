@@ -10,12 +10,17 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -297,6 +302,30 @@ public class InterfacePngToWav {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = insets;
 		contentPane.add(labelSeconde, c);
+		
+		//drag and drop
+		f.setDropTarget(new DropTarget() {
+			 public synchronized void drop(DropTargetDropEvent evt) {
+			        try {
+			            evt.acceptDrop(DnDConstants.ACTION_COPY);
+			            List<File> droppedFiles = (List<File>)
+			            evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+			            for (File file : droppedFiles) {
+			            	if( file.getPath().substring(file.getPath().indexOf('.'),file.getPath().length()).contains("png") )
+			            	{
+			            		label1.setText(file.toString());
+			            		label2.setText(file.getPath().substring(0, file.getPath().indexOf('.')) + ".wav");
+			            	}else
+			            	{
+			            		JOptionPane.showMessageDialog(f, "The file was not in a recognized read file format. (PNG)",
+			            				"File read Error", JOptionPane.ERROR_MESSAGE); // message d'erreur : le fichier n'a pas pu être lu
+			            	}
+			            }
+			        } catch (Exception ex) {
+			            ex.printStackTrace();
+			        }
+			    }
+		});
 
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		//f.pack();
