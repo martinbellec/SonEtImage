@@ -115,7 +115,7 @@ public class InterfaceWavToPng {
 		contentPane.add(bOut, c);
 
 		label2 = new JTextField();
-		label2.setText((System.getProperty("user.dir") + "\\out.wav"));
+		label2.setText((System.getProperty("user.dir") + "\\out.png"));
 		c.gridx = 1;
 		c.gridy = 6;
 		c.gridheight = 1; // do not remove
