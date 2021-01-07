@@ -9,6 +9,7 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 import IHM.Config;
+import IHM.Json;
 
 /* Read a image and make sound for each column of pixel.
  * You can def the maximum frequency (top a the image) and the minimum frequency (bottom of the image.
@@ -207,8 +208,11 @@ public class App extends Thread{
 			wavFile.close();
 			//display info
 			wavFile.display();
+			
+			//Create Json file
+			Json json = new Json(fileOut,config,true); //true because PngToWav
 
-			System.out.println("Traitement terminÃ© !");
+			System.out.println("Traitement terminé !");
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

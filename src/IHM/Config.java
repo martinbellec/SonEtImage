@@ -7,7 +7,7 @@ public class Config {
 	private int octaveMin;
 	private int octaveMax;
 	private int keyVolumeColor;
-	private int keyPannignColor;
+	private int keyPanningColor;
 	private double duration;
 	
 	//for WavToPng
@@ -31,8 +31,8 @@ public class Config {
 		this.octaveMin = Integer.parseInt(octaveMin);
 		this.octaveMax = Integer.parseInt(octaveMax);
 		System.out.println(volumeColor + pannignColor+duration);
-		this.keyVolumeColor = StringRGBtoint(volumeColor);
-		this.keyPannignColor = StringRGBtoint(pannignColor);
+		this.keyVolumeColor = stringRGBtoint(volumeColor);
+		this.keyPanningColor = stringRGBtoint(pannignColor);
 		this.duration =  Double.parseDouble(duration);
 	}
 	
@@ -42,7 +42,7 @@ public class Config {
 		this.keySaturation = (float) (keySaturation/100.0);
 	}
 
-	private int StringRGBtoint(String rgb) {
+	private int stringRGBtoint(String rgb) {
 		int num = 0;
 		switch (rgb) {
 		case "Red":
@@ -80,7 +80,7 @@ public class Config {
 	}
 
 	public int getPannignColor() {
-		return keyPannignColor;
+		return keyPanningColor;
 	}
 
 	public double getDuration() {
@@ -100,7 +100,7 @@ public class Config {
 	}
 
 	public void displayPTW() {
-		System.out.println("gamme "+gamme+" "+octaveMin + " "+octaveMax+" "+keyVolumeColor+" "+keyPannignColor+" " +duration);
+		System.out.println("gamme "+gamme+" "+octaveMin + " "+octaveMax+" "+keyVolumeColor+" "+keyPanningColor+" " +duration);
 	}
 	
 	public void displayWTP() {

@@ -9,6 +9,7 @@ import java.util.Arrays;
 import javax.imageio.ImageIO;
 
 import IHM.Config;
+import IHM.Json;
 
 public class App {
 	
@@ -110,6 +111,8 @@ public class App {
             
 			File outputfile = new File(fileOut);
             ImageIO.write(theImage, "png", outputfile);
+            
+            Json json = new Json(fileOut,config,false); //false because WavToPng
             
 /*            System.out.println("File output path:  " + fileOut);
             System.out.println("end");
